@@ -16,7 +16,9 @@ INSTALLED_APPS = [
     
     'rest_framework',
     
-    'apps.users.apps.UsersConfig'
+    'apps.users.apps.UsersConfig',
+    'apps.parking.apps.ParkingConfig',
+    'apps.utils.apps.UtilsConfig'
 ]
 
 MIDDLEWARE = [

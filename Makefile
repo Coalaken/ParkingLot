@@ -9,10 +9,12 @@ run:
 
 
 .PHONY: migrate
+migrate:
 	poetry run python3.10 -m core.manage migrate
 
 
-.PHONY: makemigrations
+.PHONY: migrations
+migrations:
 	poetry run python3.10 -m core.manage makemigrations
 
 

@@ -1,5 +1,8 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import  BaseUserManager, AbstractBaseUser
+
+from apps.utils.models import Timestamps
 
 
 class UserManager(BaseUserManager):
@@ -65,19 +68,20 @@ class User(AbstractBaseUser):
         return self.phone
 
     def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
-        # Simplest possible answer: Yes, always
         return True
 
     def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
-        # Simplest possible answer: Yes, always
         return True
 
     @property
     def is_staff(self):
-        "Is the user a member of staff?"
-        # Simplest possible answer: All admins are staff
         return self.is_admin
     
-        
+
+class Client(Timestamps):
+    user = models.OneToOneField(
+		settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+	)
+    
+    def __str__(self) -> str:
+        return f"User_{self.user.id}: {self.user.phone}"

@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from . import models
+
+
+# check how @register works
+@admin.register(models.Client)
+class ClientAdmin(admin.ModelAdmin):
+    list_display = ['user']
+    raw_id_fields = ['user']
