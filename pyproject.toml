@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "autoplace"
+name = "parkingLot"
 version = "0.1.0"
 description = ""
 authors = ["Matvey <matveykawork@gmail.com>"]
