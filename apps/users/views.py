@@ -9,11 +9,8 @@ from rest_framework.authentication import BaseAuthentication
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAdminUser, ]
-    authentication_classes = [BaseAuthentication,]
 
 
 class ClientViewSet(ModelViewSet):
 	queryset = Client.objects.select_related('user').all()
 	serializer_class = ExtendedClientSerializer
-	permission_classes = [IsAdminUser, ]

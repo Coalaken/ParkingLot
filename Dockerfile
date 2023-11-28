@@ -3,14 +3,12 @@ FROM python:3.10
 
 WORKDIR /app
 
-COPY ./apps .
-COPY ./core .
-COPY ./locals .
-COPY ./Makefile .
-COPY ./pyproject.toml .
+COPY ./apps ./apps/
+COPY ./core ./core/
+COPY ./locals ./locals/
+COPY ./req.txt .
 
-RUN pip install poetry
-
-RUN poetry install
+RUN pip install -r req.txt
+RUN python3 -m core.manage migrate
 
 EXPOSE 8000

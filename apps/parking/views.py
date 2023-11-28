@@ -14,7 +14,6 @@ from .serializers import CarSerializer, PlaceSerializer
 class CarViewSet(ModelViewSet):
     queryset = Car.objects.select_related('owner', 'owner__user').all()
     serializer_class = CarSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly, ]
 
 
 class PlaceViewSet(ModelViewSet):
@@ -27,7 +26,6 @@ class PlaceViewSet(ModelViewSet):
 		) 
 	).all()
     serializer_class = PlaceSerializer
-    permission_classes = [IsAuthenticated, ]
     
     @action(detail=True, methods=['post', 'get'])
     def pay(self, request, pk=None):

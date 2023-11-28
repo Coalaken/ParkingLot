@@ -7,8 +7,10 @@ services:
     build: 
       context: .
     volumes:
-      - ./
+      - ./apps:/apps
+      - ./core:/core
+      - ./locals:/locals
     ports:
       - "8000:8000"
     command: >
-      make run
+      python3 -m core.manage runserver 0.0.0.0:8000
