@@ -1,0 +1,14 @@
+version: '3'
+
+
+services:
+  django_web:
+    container_name: django_web
+    build: 
+      context: .
+    volumes:
+      - ./
+    ports:
+      - "8000:8000"
+    command: >
+      make run

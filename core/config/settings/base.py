@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     
 	'debug_toolbar',
     'rest_framework',
+    'rest_framework_swagger',
     
     'apps.users.apps.UsersConfig',
     'apps.parking.apps.ParkingConfig',
@@ -51,6 +52,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+				'staticfiles': 'django.templatetags.static'
+			}
         },
     },
 ]
@@ -109,6 +113,14 @@ LOGGING = {
 			"level": os.getenv("DJANGO_LOG_LEVEL", "DEBUG"),  # type: ignore
 		}
 	}
+}
+
+
+REST_FRAMEWORK = {
+	'DEFAULT_PERMISSION_CLASSES': [
+		'rest_framework.permissions.AllowAny',
+	],
+	'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
 LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/api/v1/cars/'
