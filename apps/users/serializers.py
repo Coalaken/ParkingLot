@@ -3,6 +3,12 @@ from rest_framework import serializers
 from .models import User, Client
 
 
+class SimpleUserSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = User
+		fields = ('id', 'username', 'phone')
+  
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -16,8 +22,8 @@ class ClientSerializer(serializers.ModelSerializer):
 
 
 class ExtendedClientSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user = SimpleUserSerializer()
     
     class Meta:
         model = Client
-        fields = ('id', 'user')
+        fields = ('id', 'user', 'created_at')
