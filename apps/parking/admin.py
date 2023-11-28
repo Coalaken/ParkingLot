@@ -5,9 +5,9 @@ from . import models
 
 @admin.register(models.Car)
 class CarAdmin(admin.ModelAdmin):
-    list_display = ['owner', 'car_number', 'car_model']
+    list_display = ['owner', 'number', 'model']
     raw_id_fields = ['owner']
-    list_editable = ['car_number', 'car_model']
+    list_editable = ['number', 'model']
 
 
 @admin.register(models.Place)

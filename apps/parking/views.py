@@ -1,3 +1,24 @@
-from django.shortcuts import render
+from django.db.models import Prefetch
 
-# Create your views here.
+from rest_framework.viewsets import ModelViewSet
+
+from .models import Car, Place
+from apps.users.models import Client
+from .serializers import CarSerializer, PlaceSerializer
+
+
+class CarViewSet(ModelViewSet):
+    queryset = Car.objects.select_related('owner', 'owner__user').all()
+    serializer_class = CarSerializer
+
+
+class PlaceViewSet(ModelViewSet):
+    queryset = Place.objects.prefetch_related(
+        Prefetch(
+			'client', queryset=Client.objects.select_related('user').only('user__phone').all()
+		),
+		Prefetch(
+			'car', queryset=Car.objects.select_related('owner').only('number', 'owner__user__id').all()
+		) 
+	).all()
+    serializer_class = PlaceSerializer

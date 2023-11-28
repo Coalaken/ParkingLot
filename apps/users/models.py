@@ -84,4 +84,4 @@ class Client(Timestamps):
 	)
     
     def __str__(self) -> str:
-        return f"User_{self.user.id}: {self.user.phone}"
+        return str(self.user.phone)
