@@ -16,9 +16,10 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ClientSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(source='user.phone')
     class Meta:
         model = Client
-        fields = ('id', 'user')
+        fields = ('user',)
 
 
 class ExtendedClientSerializer(serializers.ModelSerializer):
@@ -26,4 +27,4 @@ class ExtendedClientSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Client
-        fields = ('id', 'user', 'created_at')
+        fields = ('id', 'user', )
