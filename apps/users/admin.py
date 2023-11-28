@@ -7,4 +7,3 @@ from . import models
 @admin.register(models.Client)
 class ClientAdmin(admin.ModelAdmin):
     list_display = ['user']
-    raw_id_fields = ['user']

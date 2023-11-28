@@ -18,6 +18,6 @@ migrations:
 	poetry run python3.10 -m core.manage makemigrations
 
 
-.PHONY: createsuperuser
-createsuperuser:
+.PHONY: superuser
+superuser:
 	poetry run python3.10 -m core.manage createsuperuser
