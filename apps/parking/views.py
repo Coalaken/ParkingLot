@@ -1,6 +1,10 @@
 from django.db.models import Prefetch
+from django.urls import reverse
 
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from .models import Car, Place
 from apps.users.models import Client
@@ -10,6 +14,7 @@ from .serializers import CarSerializer, PlaceSerializer
 class CarViewSet(ModelViewSet):
     queryset = Car.objects.select_related('owner', 'owner__user').all()
     serializer_class = CarSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly, ]
 
 
 class PlaceViewSet(ModelViewSet):
@@ -22,3 +27,12 @@ class PlaceViewSet(ModelViewSet):
 		) 
 	).all()
     serializer_class = PlaceSerializer
+    permission_classes = [IsAuthenticated, ]
+    
+    @action(detail=True, methods=['post', 'get'])
+    def pay(self, request, pk=None):
+        place = self.get_object()
+        place.payed = True if not place.payed else False
+        place.save()
+        return Response(place.payed)
+    
