@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     
 	'debug_toolbar',
     'rest_framework',
+    'rest_framework.authtoken',
     'rest_framework_swagger',
     
     'apps.users.apps.UsersConfig',
@@ -115,8 +116,11 @@ LOGGING = {
 	}
 }
 
-
 REST_FRAMEWORK = {
+	'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
 	'DEFAULT_PERMISSION_CLASSES': [
 		'rest_framework.permissions.AllowAny',
 	],

@@ -26,6 +26,7 @@ urlpatterns = [
     path('swagger/', schema_view),
     path('api-auth/', include('rest_framework.urls')),
     path('api/v1/', include(router.urls)),
+    path('api/v1/my/lgoin/', uviews.LoginView.as_view(), name='my_login')
     
 ]
 

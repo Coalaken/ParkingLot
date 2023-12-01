@@ -1,5 +1,4 @@
 from django.db.models import Prefetch
-from django.urls import reverse
 
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -33,4 +32,3 @@ class PlaceViewSet(ModelViewSet):
         place.payed = True if not place.payed else False
         place.save()
         return Response(place.payed)
-    
