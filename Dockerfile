@@ -1,4 +1,4 @@
-FROM python:3.10
+FROM python:3.10-alpine3.16
 
 
 WORKDIR /app
@@ -8,7 +8,7 @@ COPY ./core ./core/
 COPY ./locals ./locals/
 COPY ./req.txt .
 
+RUN pip install --upgrade pip
 RUN pip install -r req.txt
-RUN python3 -m core.manage migrate
 
 EXPOSE 8000

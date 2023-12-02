@@ -2,15 +2,33 @@ version: '3'
 
 
 services:
+  database:
+    image: postgres:14.6-alpine
+    environment:
+      - POSTGRES_DB=aplot
+      - POSTGRES_USER=aplot_admin
+      - POSTGRES_PASSWORD=pass
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
   django_web:
     container_name: django_web
     build: 
       context: .
+    depends_on:
+      - database
     volumes:
       - ./apps:/apps
       - ./core:/core
-      - ./locals:/locals
+      - ./locals:/locals 
+    environment:
+      - DB_NAME=aplot
+      - DB_USER=aplot_admin
+      - DB_PASS=pass
+      - DB_HOST=database
     ports:
       - "8000:8000"
-    command: >
-      python3 -m core.manage runserver 0.0.0.0:8000
+    command: sh -c "python3 -m core.manage makemigrations && python3 -m core.manage migrate && python3 -m core.manage runserver 0.0.0.0:8000"
+
+volumes:
+  pgdata:

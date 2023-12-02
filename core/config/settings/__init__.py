@@ -1,5 +1,4 @@
 from pathlib import Path
-import os
 from split_settings.tools import (
     include,
     optional
